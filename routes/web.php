@@ -14,3 +14,8 @@
 Route::get('/', function () {
     return view('test');
 });
+
+/**
+ * Auth routes
+ */
+Route::get('auth/register', 'Auth\\RegisterController@showRegistrationForm');
