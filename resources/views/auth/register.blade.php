@@ -4,7 +4,7 @@
     <h1 class="text-center">Registration</h1>
     <hr>
     <div class="col-md-4 col-md-offset-4">
-        {!! Form::open(['url' => 'auth\register', 'method' => 'post', 'class' => 'form-horizontal',]) !!}
+        {!! Form::open(['url' => 'auth/register', 'method' => 'post', 'class' => '',]) !!}
 
             <div class="form-group">
                 {!! Form::label('username', 'Name:') !!}
