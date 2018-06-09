@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-    <h3 class="text-center">Login</h3>
+    <h1 class="text-center">Login</h1>
     <hr>
     <div class="col-md-4 col-md-offset-4">
         {!! Form::open(['url' => 'auth\login', 'method' => 'post']) !!}
