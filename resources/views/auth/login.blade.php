@@ -1,14 +1,14 @@
 @extends('layouts.main')
 
 @section('content')
-    <h1 class="text-center">Login</h1>
+    <h3 class="text-center">Login</h3>
     <hr>
     <div class="col-md-4 col-md-offset-4">
         {!! Form::open(['url' => 'auth\login', 'method' => 'post']) !!}
 
             <div class="form-group">
-                {!! Form::label('email', 'Email:') !!}
-                {!! Form::email('email', null, ['class' => 'form-control',]) !!}
+                {!! Form::label('email', 'Email:', ['class' => '',]) !!}
+                {!! Form::email('email', null, ['class' => 'form-control input-md', 'autofocus' => '',]) !!}
             </div>
             <div class="form-group">
                 {!! Form::label('password', 'Password:') !!}
