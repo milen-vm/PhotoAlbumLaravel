@@ -23,3 +23,8 @@ Route::post('auth/register', 'Auth\\RegisterController@register');
 Route::get('auth/login', 'Auth\\LoginController@showLoginForm');
 Route::post('auth/login', 'Auth\\LoginController@login')->name('login');
 Route::get('auth/logout', 'Auth\\LoginController@logout');      // TODO change request to post
+
+/**
+ * Albums routes
+ */
+Route::resource('albums', 'AlbumsController');
