@@ -1,3 +1,3 @@
 <footer>
-    <span class="text-center">Footer</span>
+    <h6 class="text-center">Footer</h6>
 </footer>
