@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Album;
-use Illuminate\Http\Request;
+use App\Http\Requests\AlbumRequest;
 use Illuminate\Support\Facades\Auth;
 
 class AlbumsController extends Controller
@@ -12,6 +12,9 @@ class AlbumsController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->except(['index',]);
+        $this->middleware('can:view,album')->only(['show',]);
+        $this->middleware('can:update,album')->only(['edit', 'update',]);
+        $this->middleware('can:delete,album')->only(['destroy',]);
     }
 
     /**
@@ -21,7 +24,9 @@ class AlbumsController extends Controller
      */
     public function index()
     {
-        //
+        $albums = Auth::user()->albums;
+
+        return $albums;
     }
 
     /**
@@ -31,63 +36,72 @@ class AlbumsController extends Controller
      */
     public function create()
     {
-        return view('albums.create');
+        return view('albums.create')->with(['buttonName' => 'Create']);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\AlbumRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AlbumRequest $request)
     {
         $album = new Album($request->all());
-        $album->user_id = Auth::user()->id;
-        $album->save();
+        Auth::user()->albums()->save($album);
+
+        return redirect('/')->with([
+            'flash_info' => 'Your album has been created.',
+        ]);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Album $album
+     * @return Album
      */
-    public function show($id)
+    public function show(Album $album)
     {
-        //
+//        $this->authorize('view', $album);
+
+        return $album;
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Album  $album
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Album $album)
     {
-        //
+        return view('albums.edit', compact('album'))->with(['buttonName' => 'Save']);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Http\Requests\AlbumRequest  $request
+     * @param  \App\Album $album
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(AlbumRequest $request, Album $album)
     {
-        //
+        $album->update($request->all());
+
+        return redirect('albums')->with([
+            'flash_info' => 'Album has been updated',
+        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Album  $album
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Album $album)
     {
         //
     }
