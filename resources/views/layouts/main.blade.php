@@ -1,7 +1,6 @@
 @include('layouts.public.header')
 
 <body>
-
     <div class="container">
 
     @include('partials.flash')
@@ -12,4 +11,5 @@
 
     @include('layouts.public.footer')
 
+    @yield('script')
 </body>

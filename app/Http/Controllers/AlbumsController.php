@@ -11,7 +11,7 @@ class AlbumsController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth')->except(['index',]);
+        $this->middleware('auth');
         $this->middleware('can:view,album')->only(['show',]);
         $this->middleware('can:update,album')->only(['edit', 'update',]);
         $this->middleware('can:delete,album')->only(['destroy',]);
