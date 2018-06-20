@@ -18,11 +18,13 @@ Route::get('/', function () {
 /**
  * Auth routes
  */
-Route::get('auth/register', 'Auth\\RegisterController@showRegistrationForm');
-Route::post('auth/register', 'Auth\\RegisterController@register');
-Route::get('auth/login', 'Auth\\LoginController@showLoginForm');
-Route::post('auth/login', 'Auth\\LoginController@login')->name('login');
-Route::get('auth/logout', 'Auth\\LoginController@logout');      // TODO change request to post
+Route::prefix('auth')->group(function () {
+    Route::get('register', 'Auth\\RegisterController@showRegistrationForm');
+    Route::post('register', 'Auth\\RegisterController@register');
+    Route::get('login', 'Auth\\LoginController@showLoginForm');
+    Route::post('login', 'Auth\\LoginController@login')->name('login');
+    Route::get('logout', 'Auth\\LoginController@logout');      // TODO change request to post
+});
 
 /**
  * Albums routes
