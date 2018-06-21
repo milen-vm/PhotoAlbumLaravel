@@ -26,7 +26,7 @@ class AlbumsController extends Controller
     {
         $albums = Auth::user()->albums;
 
-        return $albums;
+        return view('albums.index', compact('albums'));
     }
 
     /**
