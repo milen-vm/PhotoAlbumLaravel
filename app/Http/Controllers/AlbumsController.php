@@ -12,9 +12,10 @@ class AlbumsController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('can:view,album')->only(['show',]);
-        $this->middleware('can:update,album')->only(['edit', 'update',]);
-        $this->middleware('can:delete,album')->only(['destroy',]);
+//        $this->middleware('can:view,album')->only(['show',]);
+//        $this->middleware('can:update,album')->only(['edit', 'update',]);
+//        $this->middleware('can:delete,album')->only(['destroy',]);
+        $this->authorizeResource(Album::class);
     }
 
     /**
@@ -103,6 +104,10 @@ class AlbumsController extends Controller
      */
     public function destroy(Album $album)
     {
-        //
+        $album->delete();
+        return response()->json($album);
+        return redirect('albums')->with([
+            'flash_info' => 'Album has been deleted.',
+        ]);
     }
 }
