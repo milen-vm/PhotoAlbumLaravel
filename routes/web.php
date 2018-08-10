@@ -19,11 +19,14 @@ Route::get('/', function () {
  * Auth routes
  */
 Route::prefix('auth')->group(function () {
-    Route::get('register', 'Auth\\RegisterController@showRegistrationForm');
-    Route::post('register', 'Auth\\RegisterController@register');
-    Route::get('login', 'Auth\\LoginController@showLoginForm');
-    Route::post('login', 'Auth\\LoginController@login')->name('login');
-    Route::get('logout', 'Auth\\LoginController@logout');      // TODO change request to post
+
+    Route::namespace('Auth')->group(function () {
+        Route::get('register', 'RegisterController@showRegistrationForm');
+        Route::post('register', 'RegisterController@register');
+        Route::get('login', 'LoginController@showLoginForm');
+        Route::post('login', 'LoginController@login')->name('login');
+        Route::get('logout', 'LoginController@logout');      // TODO change request to post
+    });
 });
 
 /**
